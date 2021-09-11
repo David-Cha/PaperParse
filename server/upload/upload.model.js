@@ -7,8 +7,10 @@ const esclient = new Client({ node: 'http://localhost:9200' });
 const index = 'pages';
 
 const indexPdfPage = function (articleTitle, id, page, pageNumber) {
+  console.log("indexPdfPage");
+
   esclient.index({
-    index: articleTitle,
+    index: articleTitle.toLowerCase(),
     id: id,
     body: {
       data: page,
@@ -17,6 +19,8 @@ const indexPdfPage = function (articleTitle, id, page, pageNumber) {
     },
     pipeline: 'attachment'
   });
+
+  console.log("indexPdfPage done");
 };
 
 exports.indexPdfPages = async function (articleTitle, buffer) {
@@ -36,9 +40,11 @@ exports.indexPdfPages = async function (articleTitle, buffer) {
 };
 
 const indexSentences = async function (articleTitle, totalPages) {
+  console.log("indexSentences");
+
   for (let i=0; i < totalPages; ++i) {
-    const { body } = await esclient.search({
-      index: articleTitle,
+    const { body } = await esclient.get({
+      index: articleTitle.toLowerCase(),
       id: `${articleTitle}-${i+1}`
     });
 
@@ -46,7 +52,7 @@ const indexSentences = async function (articleTitle, totalPages) {
     const parsedSentences = parseSentencesInPage(text);
 
     for (const sentence in parsedSentences) {
-      esclient.index({
+      await esclient.index({
         index: "sentences",
         body: {
           sentence: sentence,
@@ -56,6 +62,8 @@ const indexSentences = async function (articleTitle, totalPages) {
       });
     }
   }
+
+  console.log("indexSentences done");
 };
 
 const parseSentencesInPage = function (text) {
