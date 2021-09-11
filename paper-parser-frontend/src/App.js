@@ -1,24 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
 
+import Interface from './Components/Interface/Interface';
+import Result from './Components/ResultsList/ResultsList'
+
+let testresult = {
+  article_title: "Math",
+  page_number: 1,
+  sentence: "e to the i pi squared minus 1 equals 0"
+}
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Result result={testresult}/>
   );
 }
 
