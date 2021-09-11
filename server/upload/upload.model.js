@@ -34,10 +34,10 @@ exports.indexPdfPages = async function (articleTitle, buffer) {
     indexPdfPage(articleTitle, `${articleTitle}-${i+1}`, currentPageDocBytes, i+1);
   }
 
-  indexSentences(articleTitle, length);
+  await indexSentences(articleTitle, length);
 };
 
-const indexSentences = function (articleTitle, totalPages) {
+const indexSentences = async function (articleTitle, totalPages) {
   for (let i=0; i < totalPages; ++i) {
     const { body } = await esclient.search({
       index: articleTitle,
