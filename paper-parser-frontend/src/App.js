@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import Interface from './Components/Interface/Interface';
-import Result from './Components/ResultsList/ResultsList'
+import ResultsList from './Components/ResultsList/ResultsList'
 
 let testresult = {
   article_title: "Math",
@@ -10,9 +10,21 @@ let testresult = {
   sentence: "e to the i pi squared minus 1 equals 0"
 }
 
+let testresult2 = {
+  article_title: "Physics",
+  page_number: 100,
+  sentence: "E equals m c squared"
+}
+
+let testResultList = []
+
 function App() {
   return (
-    <Result result={testresult}/>
+    <div>
+      <Interface />
+      <ResultsList results={testResultList} />
+    </div>
+    
   );
 }
 

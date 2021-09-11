@@ -21,4 +21,17 @@ function Result(props){
     );
 }
 
-export default Result;
+// displays a list of results using the Results component
+// takes an array of results, which are all objects
+function ResultsList(props){
+    const list =  props.results.map((result) => 
+        <Result result={result}/>
+    );
+    return(
+        <div>
+            {list}
+        </div>
+    );
+}
+
+export default ResultsList;
