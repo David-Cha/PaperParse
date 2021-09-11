@@ -4,22 +4,24 @@ const { Client } = require('@elastic/elasticsearch');
 const { PDFDocument } = require('pdf-lib');
 
 const esclient = new Client({ node: 'http://localhost:9200' });
-const index = 'vue-upload-test';
+const index = 'pages';
 
-const indexPdfPage = function (id, page, pageNumber) {
+// TODO edit the routes such that you also get doc name from front-end, which will be part of id and index
+
+const indexPdfPage = function (articleTitle, id, page, pageNumber) {
   esclient.index({
-    index: index,
+    index: articleTitle,
     id: id,
     body: {
       data: page,
-      doc_name: "TODO NAME",
+      doc_name: articleTitle,
       doc_page: pageNumber
     },
     pipeline: 'attachment'
   });
 };
 
-exports.indexPdfPages = async function (buffer) { // TODO: file names
+exports.indexPdfPages = async function (articleTitle, buffer) {
   const pdfDoc = await PDFDocument.load(buffer);
   const length = pdfDoc.getPages().length;
 
@@ -29,14 +31,38 @@ exports.indexPdfPages = async function (buffer) { // TODO: file names
     currentPageDoc.addPage(currentPage);
     const currentPageDocBytes = await currentPageDoc.saveAsBase64();
 
-    indexPdfPage(`GET-NAME-FROM-PARAMS-${i+1}`, currentPageDocBytes, i+1);
+    indexPdfPage(articleTitle, `${articleTitle}-${i+1}`, currentPageDocBytes, i+1);
+  }
+
+  indexSentences(articleTitle, length);
+};
+
+const indexSentences = function (articleTitle, totalPages) {
+  for (let i=0; i < totalPages; ++i) {
+    const { body } = await esclient.search({
+      index: articleTitle,
+      id: `${articleTitle}-${i+1}`
+    });
+
+    const text = body._source.attachment.content;
+    const parsedSentences = parseSentencesInPage(text);
+
+    for (const sentence in parsedSentences) {
+      esclient.index({
+        index: "sentences",
+        body: {
+          sentence: sentence,
+          doc_name: articleTitle,
+          doc_page: i+1
+        }
+      });
+    }
   }
 };
 
-const parseSentencesInPage = function (articleTitle, pageNumber, text) {
+const parseSentencesInPage = function (text) {
   // parse text, break it into individual sentences
   // only get the sentences that contain statistics
-  // store in array where each element contains a sentence, pageNumber, articleTitle
 }
 
 exports.deletePdfPages = async function (fileName) {

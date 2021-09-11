@@ -4,7 +4,7 @@ const UploadModel = require('./upload.model');
 
 exports.uploadPdf = async function (req, res) {
   try {
-    await UploadModel.indexPdfPages(req.file.buffer);
+    await UploadModel.indexPdfPages(req.filename, req.file.buffer);
   } catch (error) {
     console.log('Error uploading PDF: ' + error);
     return res.status(400).send('Failed to upload PDF');
