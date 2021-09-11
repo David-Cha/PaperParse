@@ -32,7 +32,7 @@ function Interface(props){
         // Details of the uploaded file
         console.log(files);
         
-        let filename = files.name.slice(0, -4);
+        let filename = files[0].name.slice(0, -4);
 
         try {
             axios.post('http://localhost:5000/upload', formData, {
