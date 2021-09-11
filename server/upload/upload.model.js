@@ -33,6 +33,12 @@ exports.indexPdfPages = async function (buffer) { // TODO: file names
   }
 };
 
+const parseSentencesInPage = function (articleTitle, pageNumber, text) {
+  // parse text, break it into individual sentences
+  // only get the sentences that contain statistics
+  // store in array where each element contains a sentence, pageNumber, articleTitle
+}
+
 exports.deletePdfPages = async function (fileName) {
   esclient.deleteByQuery({
     index: index,
