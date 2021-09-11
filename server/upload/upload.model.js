@@ -74,8 +74,9 @@ const parseSentencesInPage = function (text) {
         if (find_stat(sentences[i]) == 0){
             delete sentences[i];
         }
-        var sentences[i]=sentences[i].replace(/\n/g, ' ');
+        sentences[i] = sentences[i].replace(/\n/g, ' ');
     }
+
     return sentences;
 }
 
