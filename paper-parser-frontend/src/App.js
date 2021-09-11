@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
 
 import Interface from './Components/Interface/Interface';
 import ResultsList from './Components/ResultsList/ResultsList'
@@ -19,10 +20,12 @@ let testresult2 = {
 let testResultList = []
 
 function App() {
+  const [results, setResults] = useState([]);
+
   return (
     <div>
-      <Interface />
-      <ResultsList results={testResultList} />
+      <Interface results={results} setResults={setResults}/>
+      <ResultsList results={results} />
     </div>
     
   );
