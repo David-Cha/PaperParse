@@ -61,8 +61,22 @@ const indexSentences = function (articleTitle, totalPages) {
 };
 
 const parseSentencesInPage = function (text) {
-  // parse text, break it into individual sentences
-  // only get the sentences that contain statistics
+    // parse text, break it into individual sentences
+    // only get the sentences that contain statistics
+        // statistic is something that contains "(%|\d.\d)
+    // has a percent sign, or is any number of digits then . then any number of digits
+    // store in array where each element contains a sentence, pageNumber, articleTitle
+
+    // TODO: much more complex matching, right now it's only %
+    var text=text.replace(/\n/g, ' ');
+
+    let sentences = text.split(". ");
+    for (let i=0; i < sentences.length; i++){
+        if (sentences[i].search("%") == -1){
+            delete sentences[i];
+        }
+    }
+    return sentences;
 }
 
 exports.deletePdfPages = async function (fileName) {
