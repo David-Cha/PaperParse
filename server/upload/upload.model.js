@@ -66,16 +66,34 @@ const parseSentencesInPage = function (text) {
     // store in array where each element contains a sentence, pageNumber, articleTitle
 
     // TODO: much more complex matching, right now it's only %
-    var text=text.replace(/\n/g, ' ');
+    var text=text.replace('et al.', '<@#!'); // set et al. to something else so it's not a sentence
 
     let sentences = text.split(". ");
+    var text=text.replace('<@#!', 'et al.'); // revert to et al.
     for (let i=0; i < sentences.length; i++){
-        if (sentences[i].search("%") == -1){
+        if (find_stat(sentences[i]) == 0){
             delete sentences[i];
         }
+        var sentences[i]=sentences[i].replace(/\n/g, ' ');
     }
     return sentences;
 }
+
+const find_stat = function (sentence) {
+    var flag = 0;
+    if (sentence.search("%") != -1) {
+        flag = 1;
+    }
+    else if (sentence.search(/\d*\.\d*/) != -1) {
+        flag = 1;
+    }
+    else if (sentence.search(/(=|<|>) ?((\d*\.\d*)|(\d+))/) != -1) {
+        //include geq and leq here (=|<|>|GEQ|LEQ)
+        flag = 1;
+    }
+    return flag;
+}
+
 
 exports.deletePdfPages = async function (fileName) {
   esclient.deleteByQuery({
