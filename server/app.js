@@ -11,7 +11,8 @@ const UploadRoutes = require('./upload/upload.router');
 const app = express();
 const port = 5000;
 
-app.use(bodyParser.json());
+app.use(express.urlencoded({extended: true}));
+app.use(express.json()) 
 app.use(cors());
 
 // app.use(express.static(path.join(__dirname, '../app/dist/')));

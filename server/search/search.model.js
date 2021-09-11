@@ -3,7 +3,7 @@
 const { Client } = require('@elastic/elasticsearch');
 
 const esclient = new Client({ node: 'http://localhost:9200' });
-const index = 'vue-upload-test';
+const index = 'sentences';
 
 exports.search = async function (searchText) {
   const model = [];
@@ -12,7 +12,7 @@ exports.search = async function (searchText) {
     body: {
       query: {
         match: {
-          'attachment.content': searchText
+          'attachment.content': searchText // TODO: will need to be changed
         }
       }
     }
@@ -20,8 +20,9 @@ exports.search = async function (searchText) {
 
   body.hits.hits.forEach((hit) => {
     model.push({
-      doc_name: hit._source.doc_name,
-      doc_page: hit._source.doc_page,
+      article_title: hit._source.doc_name,
+      page_number: hit._source.doc_page,
+      sentence: hit._source.sentence,
       score: hit._score
     });
   });

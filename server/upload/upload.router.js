@@ -27,7 +27,7 @@ const upload = multer({
   }
 });
 
-router.post('/:filename', upload.single('file'), asyncHandler(UploadController.uploadPdf));
+router.post('/', upload.single('file'), asyncHandler(UploadController.uploadPdf));
 router.delete('/:id', asyncHandler(UploadController.deletePdf));
 
 module.exports = router;

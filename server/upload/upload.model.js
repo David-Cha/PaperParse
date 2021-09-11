@@ -6,8 +6,6 @@ const { PDFDocument } = require('pdf-lib');
 const esclient = new Client({ node: 'http://localhost:9200' });
 const index = 'pages';
 
-// TODO edit the routes such that you also get doc name from front-end, which will be part of id and index
-
 const indexPdfPage = function (articleTitle, id, page, pageNumber) {
   esclient.index({
     index: articleTitle,
