@@ -52,14 +52,16 @@ const indexSentences = async function (articleTitle, totalPages) {
     const parsedSentences = parseSentencesInPage(text);
 
     for (const sentence of parsedSentences) {
-      await esclient.index({
-        index: "sentences",
-        body: {
-          sentence: sentence,
-          doc_name: articleTitle,
-          doc_page: i+1
-        }
-      });
+      if (sentence != "") {
+        await esclient.index({
+          index: "sentences",
+          body: {
+            sentence: sentence,
+            doc_name: articleTitle,
+            doc_page: i+1
+          }
+        });
+      }
     }
   }
 
@@ -82,10 +84,9 @@ const parseSentencesInPage = function (text) {
     var text=text.replace('<@!!', 'etc.'); // revert to etc.
     for (let i=0; i < sentences.length; i++){
         if (find_stat(sentences[i]) == 0){
-            sentences[i] = null;
-        }
-        else{
-            sentences[i]=sentences[i].replace(/\n/g, ' ');
+            sentences[i] = "";
+        } else{
+            sentences[i] = sentences[i].replace(/\n/g, ' ');
         }
 
     }

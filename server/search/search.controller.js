@@ -6,7 +6,7 @@ exports.search = async function (req, res) {
   let model;
 
   try {
-    model = await SearchModel.search(req.params.id);
+    model = await SearchModel.search(req.query.text);
   } catch (error) {
     console.log('Failed to do search: ' + error);
     return res.status(400).send('Failed to do search');

@@ -12,7 +12,7 @@ exports.search = async function (searchText) {
     body: {
       query: {
         match: {
-          'attachment.content': searchText // TODO: will need to be changed
+          'sentence': searchText
         }
       }
     }

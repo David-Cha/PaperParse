@@ -6,6 +6,6 @@ const SearchController = require('./search.controller');
 
 const router = express.Router();
 
-router.get('/:id', asyncHandler(SearchController.search)); // TODO: move search query to body?
+router.get('/', asyncHandler(SearchController.search)); // TODO: move search query to body?
 
 module.exports = router;
