@@ -69,20 +69,29 @@ const indexSentences = async function (articleTitle, totalPages) {
 const parseSentencesInPage = function (text) {
     // parse text, break it into individual sentences
     // only get the sentences that contain statistics
-        // statistic is something that contains "(%|\d.\d)
-    // has a percent sign, or is any number of digits then . then any number of digits
-    // store in array where each element contains a sentence, pageNumber, articleTitle
+    // store in array where each element contains the sentence
 
-    // TODO: much more complex matching, right now it's only %
-    var text=text.replace('et al.', '<@#!'); // set et al. to something else so it's not a sentence
+    var text=text.replace('et al.', '<@#!'); 
+    // set et al. to something else so it's not a sentence
+    var text=text.replace('etc.', '<@!!'); 
+    // set etc. to something else so it's not a sentence
 
     let sentences = text.split(". ");
+
     var text=text.replace('<@#!', 'et al.'); // revert to et al.
+    var text=text.replace('<@!!', 'etc.'); // revert to etc.
     for (let i=0; i < sentences.length; i++){
         if (find_stat(sentences[i]) == 0){
             delete sentences[i];
         }
+<<<<<<< Updated upstream
         sentences[i] = sentences[i].replace(/\n/g, ' ');
+=======
+        else{
+            sentences[i]=sentences[i].replace(/\n/g, ' ');
+        }
+
+>>>>>>> Stashed changes
     }
 
     return sentences;
@@ -91,14 +100,30 @@ const parseSentencesInPage = function (text) {
 const find_stat = function (sentence) {
     var flag = 0;
     if (sentence.search("%") != -1) {
+        // if line has %
         flag = 1;
     }
-    else if (sentence.search(/\d*\.\d*/) != -1) {
-        flag = 1;
+    else if (sentence.search(/\d+\.\d*/) != -1) {
+        //if line has 111.111, 111.
+        flag = 2;
+    }
+    else if (sentence.search(/\d*\.\d+/) != -1) {
+        //if line has 111.111, .111
+        flag = 3;
     }
     else if (sentence.search(/(=|<|>) ?((\d*\.\d*)|(\d+))/) != -1) {
+        //if line has comparison test followed by space followed by numbers
+        //if line has comparison test followed by numbers
         //include geq and leq here (=|<|>|GEQ|LEQ)
-        flag = 1;
+        flag = 4;
+    }
+    else if (sentence.search(/\d+ to \d+/) != -1){
+        //if line has 111 to 111
+        flag = 5;
+    }
+    else if (sentence.search(/\d+ ?- ?\d+/) != -1){
+        //if line has 111-111 OR 111 - 111
+        flag = 6;
     }
     return flag;
 }
