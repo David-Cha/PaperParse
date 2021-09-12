@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Navbar, Form, Button } from 'react-bootstrap'
 import axios from 'axios';
+import logo from "./white_logo_no_bg.png";
 
 import './UploadNavBar.css';
 
@@ -45,7 +46,11 @@ function UploadNavBar(props){
     return(
         <Navbar bg='dark' variant="dark" fixed="top">
             <Container>
-                <Navbar.Brand><b>StatSleuth</b></Navbar.Brand>
+                <Navbar.Brand>
+                    <img
+                        src={logo}
+                    />
+                </Navbar.Brand>
                 <Form>
                     <Form.Group className="horizontal_form">
                         <Form.Control size="sm" type="file" multiple onChange={handleFileChange} className="upload"/>
