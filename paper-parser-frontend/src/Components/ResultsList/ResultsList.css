@@ -5,3 +5,14 @@
     margin-bottom: 0.5rem;
     width: 61.8%;
 }
+
+.horizontal{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.right_margin{
+    margin-right: 2em;
+    margin-bottom: 0;
+}

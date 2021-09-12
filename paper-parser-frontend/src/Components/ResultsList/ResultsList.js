@@ -12,12 +12,16 @@ function Result(props){
                 <Card.Title>
                     {props.result.article_title}
                 </Card.Title>
-                <Card.Text>
-                    Page Number: {props.result.page_number.toString()}
-                </Card.Text>
-                <Card.Text>
-                    Score: {props.result.score.toString()}
-                </Card.Text>
+                <div className="horizontal">
+                    <Card.Text className="right_margin">
+                        Page Number: {props.result.page_number.toString()}
+                    </Card.Text>
+                    <Card.Text>
+                        Score: {props.result.score.toString()}
+                    </Card.Text>
+                </div>
+                
+                <hr/>
                 <Card.Text>
                     {props.result.sentence}
                 </Card.Text>
