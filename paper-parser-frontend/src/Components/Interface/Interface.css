@@ -4,3 +4,13 @@
     margin: 0;
     padding: 0;
 }
+
+.search_bar {
+    margin: auto;
+    width: 61.8%;
+}
+
+.search_input {
+    margin: 0.5rem;
+    border-radius: 50%;
+}

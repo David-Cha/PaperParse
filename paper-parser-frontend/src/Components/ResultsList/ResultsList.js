@@ -5,7 +5,7 @@ import { Card } from 'react-bootstrap';
 // article_title, page_number, sentence
 function Result(props){
     return(
-        <Card>
+        <Card className="result">
             <Card.Body>
                 <Card.Title>
                     {props.result.article_title}

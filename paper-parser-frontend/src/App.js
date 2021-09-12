@@ -24,7 +24,7 @@ function App() {
   const [results, setResults] = useState([]);
 
   return (
-    <div>
+    <div className="main_parent">
       <UploadNavBar/>
       <Interface setResults={setResults}/>
       <ResultsList results={results} />

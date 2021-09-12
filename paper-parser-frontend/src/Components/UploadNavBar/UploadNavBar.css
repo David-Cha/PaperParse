@@ -1,6 +1,11 @@
-.horizontal_form{
+.horizontal_form {
     display: flex;
     flex-direction: row;
     margin: 0;
     padding: 0;
+}
+
+.search_input {
+    margin: 0.5rem;
+    border-radius: 50%;
 }
