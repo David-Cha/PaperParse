@@ -14,6 +14,9 @@ function Result(props){
                     Page Number: {props.result.page_number.toString()}
                 </Card.Text>
                 <Card.Text>
+                    Score: {props.result.score.toString()}
+                </Card.Text>
+                <Card.Text>
                     {props.result.sentence}
                 </Card.Text>
             </Card.Body>
