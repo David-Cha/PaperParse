@@ -17,6 +17,7 @@ function Interface(props){
             }
         })
         console.log(res.data);
+        props.setResults(res.data);
     }
 
     return(
