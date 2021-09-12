@@ -51,7 +51,7 @@ const indexSentences = async function (articleTitle, totalPages) {
     const text = body._source.attachment.content;
     const parsedSentences = parseSentencesInPage(text);
 
-    for (const sentence in parsedSentences) {
+    for (const sentence of parsedSentences) {
       await esclient.index({
         index: "sentences",
         body: {
