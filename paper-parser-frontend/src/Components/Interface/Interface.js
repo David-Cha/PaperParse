@@ -2,59 +2,28 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios';
 
-function Interface(props){
+import './Interface.css';
+
+
+async function Interface(props){
     // const [ canSearch, setCanSearch ] = useState(false);
     const [ searchQuery, setSearchQuery ] = useState("");
-    const [ files, setFiles ] = useState([]);
 
-    function handleSubmit(event){
+    async function handleSubmit(event){
         event.preventDefault();
-        
-    }
-
-    function handleFileChange(event){
-        console.log("handling file changes");
-        setFiles(event.target.files);
-    }
-
-    function handleUpload(){
-        console.log("Uploading documents");
-
-        const formData = new FormData();
-
-        // [0] only uploads the first file 
-        // TODO: remove [0] and integrate 
-        formData.append(
-            "file",
-            files[0],
-        );
-
-        // Details of the uploaded file
-        console.log(files);
-        
-        let filename = files[0].name.slice(0, -4);
-
-        try {
-            axios.post('http://localhost:5000/upload', formData, {
-                params: {
-                    filename: filename
-                }
-            });
-        }
-        catch (err) {
-            console.log(err);
-        }
+        var res = await axios.get("http://localhost:5000/search", {
+            params: {
+                text: searchQuery
+            }
+        })
+        console.log(res.data);
     }
 
     return(
         <Form>
-            <Form.Group className="mb-3">
+            <Form.Group className="horizontal_form">
                 <Form.Control type="text" placeholder="what do you want to know?" value={searchQuery} onInput={e => setSearchQuery(e.target.value)} />
-                <div>
-                    <Form.Control type="file" multiple onChange={handleFileChange}/>
-                    <Button variant="secondary" onClick={handleUpload}>Upload</Button>
-                    <Button variant="primary" type="submit" onClick={handleSubmit}>Search</Button>
-                </div>
+                <Button variant="primary" type="submit" onClick={handleSubmit}>Search</Button>
             </Form.Group>
         </Form>
 

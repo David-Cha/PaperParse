@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import Interface from './Components/Interface/Interface';
 import ResultsList from './Components/ResultsList/ResultsList'
+import UploadNavBar from './Components/UploadNavBar/UploadNavBar'
 
 let testresult = {
   article_title: "Math",
@@ -24,7 +25,8 @@ function App() {
 
   return (
     <div>
-      <Interface results={results} setResults={setResults}/>
+      <UploadNavBar/>
+      <Interface setResults={setResults}/>
       <ResultsList results={results} />
     </div>
     
