@@ -76,13 +76,13 @@ const parseSentencesInPage = function (text) {
     var text=text.replace('etc.', '<@!!'); 
     // set etc. to something else so it's not a sentence
 
-    let sentences = text.split(". ");
+    let sentences = text.split(/(\. |\.\n)/gm);
 
     var text=text.replace('<@#!', 'et al.'); // revert to et al.
     var text=text.replace('<@!!', 'etc.'); // revert to etc.
     for (let i=0; i < sentences.length; i++){
         if (find_stat(sentences[i]) == 0){
-            delete sentences[i];
+            sentences[i] = null;
         }
         else{
             sentences[i]=sentences[i].replace(/\n/g, ' ');
