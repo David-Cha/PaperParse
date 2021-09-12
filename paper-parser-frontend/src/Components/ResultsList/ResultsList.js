@@ -7,7 +7,7 @@ import './ResultsList.css';
 // article_title, page_number, sentence
 function Result(props){
     return(
-        <Card className="result">
+        <Card bg="light" className="result">
             <Card.Body>
                 <Card.Title>
                     <b>{props.result.article_title}</b>
