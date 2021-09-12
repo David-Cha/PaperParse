@@ -7,10 +7,15 @@
 
 .search_bar {
     margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     width: 61.8%;
 }
 
 .search_input {
-    margin: 0.5rem;
-    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.search_button{
+    margin-left: 0.5rem;
 }

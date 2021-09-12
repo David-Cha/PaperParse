@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
+import './ResultsList.css';
+
 // takes in a prop named result, which is an object that contains three fields:
 // article_title, page_number, sentence
 function Result(props){
