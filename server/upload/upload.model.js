@@ -73,20 +73,27 @@ const parseSentencesInPage = function (text) {
     // only get the sentences that contain statistics
     // store in array where each element contains the sentence
 
-    var text=text.replace('et al.', '<@#!'); 
+    var text=text.replace(' et al.', '<@#!'); 
     // set et al. to something else so it's not a sentence
-    var text=text.replace('etc.', '<@!!'); 
+    var text=text.replace(' etc.', '<@!!'); 
     // set etc. to something else so it's not a sentence
+    var text=text.replace(' no.', '%^!*@&#$'); 
+    var text=text.replace(' No.', '@^*#!@'); 
+    // set no. to something else so it's not a sentence
 
     let sentences = text.split(/(\. |\.\n)/gm);
 
     var text=text.replace('<@#!', 'et al.'); // revert to et al.
     var text=text.replace('<@!!', 'etc.'); // revert to etc.
+    var text=text.replace('%^!*@&#$', ' no.'); // revert to no.
+    var text=text.replace( '@^*#!@', ' No.');  
     for (let i=0; i < sentences.length; i++){
+      sentences[i]=sentences[i].trim();
         if (find_stat(sentences[i]) == 0){
-            sentences[i] = "";
-        } else{
-            sentences[i] = sentences[i].replace(/\n/g, ' ');
+            sentences[i] = null;
+        }
+        else{
+            sentences[i]=sentences[i].replace(/\n/g, ' ');
         }
 
     }
@@ -99,27 +106,23 @@ const find_stat = function (sentence) {
         // if line has %
         flag = 1;
     }
-    else if (sentence.search(/\d+\.\d*/) != -1) {
-        //if line has 111.111, 111.
+    else if (sentence.search(/\d*\.\d+/) > 0) {
+        //if line has 111.111, .111 and is not at start of string
         flag = 2;
-    }
-    else if (sentence.search(/\d*\.\d+/) != -1) {
-        //if line has 111.111, .111
-        flag = 3;
     }
     else if (sentence.search(/(=|<|>) ?((\d*\.\d*)|(\d+))/) != -1) {
         //if line has comparison test followed by space followed by numbers
         //if line has comparison test followed by numbers
         //include geq and leq here (=|<|>|GEQ|LEQ)
+        flag = 3;
+    }
+    else if (sentence.search(/\d+ to \d+/) > 0){
+        //if line has 111 to 111 and is not at start of string
         flag = 4;
     }
-    else if (sentence.search(/\d+ to \d+/) != -1){
-        //if line has 111 to 111
+    else if (sentence.search(/\d+ ?- ?\d+/) > 0){
+        //if line has 111-111 OR 111 - 111 and is not at start of string
         flag = 5;
-    }
-    else if (sentence.search(/\d+ ?- ?\d+/) != -1){
-        //if line has 111-111 OR 111 - 111
-        flag = 6;
     }
     return flag;
 }
