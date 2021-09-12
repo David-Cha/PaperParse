@@ -84,22 +84,11 @@ const parseSentencesInPage = function (text) {
         if (find_stat(sentences[i]) == 0){
             delete sentences[i];
         }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        sentences[i] = sentences[i].replace(/\n/g, ' ');
-=======
-=======
->>>>>>> Stashed changes
         else{
             sentences[i]=sentences[i].replace(/\n/g, ' ');
         }
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     }
-
     return sentences;
 }
 
@@ -133,7 +122,6 @@ const find_stat = function (sentence) {
     }
     return flag;
 }
-
 
 exports.deletePdfPages = async function (fileName) {
   esclient.deleteByQuery({
