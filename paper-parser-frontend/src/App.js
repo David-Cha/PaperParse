@@ -57,7 +57,7 @@ function App() {
     <div className="main_parent">
       <UploadNavBar/>
       <Interface setResults={setResults}/>
-      <ResultsList results={testResultList} />
+      <ResultsList results={results} />
     </div>
     
   );
