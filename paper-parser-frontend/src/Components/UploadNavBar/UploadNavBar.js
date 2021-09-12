@@ -45,7 +45,7 @@ function UploadNavBar(props){
     return(
         <Navbar bg='dark' variant="dark" fixed="top">
             <Container>
-                <Navbar.Brand>StatSleuth</Navbar.Brand>
+                <Navbar.Brand><b>StatSleuth</b></Navbar.Brand>
                 <Form>
                     <Form.Group className="horizontal_form">
                         <Form.Control size="sm" type="file" multiple onChange={handleFileChange} className="upload"/>

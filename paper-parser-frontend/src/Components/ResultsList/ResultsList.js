@@ -10,11 +10,11 @@ function Result(props){
         <Card className="result">
             <Card.Body>
                 <Card.Title>
-                    {props.result.article_title}
+                    <b>{props.result.article_title}</b>
                 </Card.Title>
                 <div className="horizontal">
                     <Card.Text className="right_margin">
-                        Page Number: {props.result.page_number.toString()}
+                        Page: {props.result.page_number.toString()}
                     </Card.Text>
                     <Card.Text>
                         Score: {props.result.score.toString()}
