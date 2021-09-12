@@ -85,12 +85,18 @@ const parseSentencesInPage = function (text) {
             delete sentences[i];
         }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         sentences[i] = sentences[i].replace(/\n/g, ' ');
 =======
+=======
+>>>>>>> Stashed changes
         else{
             sentences[i]=sentences[i].replace(/\n/g, ' ');
         }
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
 
