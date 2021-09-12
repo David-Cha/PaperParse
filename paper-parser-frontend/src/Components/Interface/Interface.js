@@ -5,7 +5,7 @@ import axios from 'axios';
 import './Interface.css';
 
 
-async function Interface(props){
+function Interface(props){
     // const [ canSearch, setCanSearch ] = useState(false);
     const [ searchQuery, setSearchQuery ] = useState("");
 
