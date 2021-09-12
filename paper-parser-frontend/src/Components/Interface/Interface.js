@@ -23,8 +23,8 @@ function Interface(props){
     return(
         <Form className="search_bar">
             <Form.Group className="horizontal_form">
-                <Form.Control type="text" placeholder="what do you want to know?" value={searchQuery} onInput={e => setSearchQuery(e.target.value)} className="search_input"/>
-                <Button variant="primary" type="submit" onClick={handleSubmit} className="search_input">Search</Button>
+                <Form.Control size="lg" type="text" placeholder="what do you want to know?" value={searchQuery} onInput={e => setSearchQuery(e.target.value)} className="search_input"/>
+                <Button size="lg" variant="primary" type="submit" onClick={handleSubmit} className="search_input">Search</Button>
             </Form.Group>
         </Form>
 

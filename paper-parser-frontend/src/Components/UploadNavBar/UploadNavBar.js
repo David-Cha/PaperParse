@@ -48,8 +48,8 @@ function UploadNavBar(props){
                 <Navbar.Brand>StatSleuth</Navbar.Brand>
                 <Form>
                     <Form.Group className="horizontal_form">
-                        <Form.Control type="file" multiple onChange={handleFileChange} className="search_input"/>
-                        <Button variant="secondary" onClick={handleUpload} className="search_input">Upload</Button>
+                        <Form.Control size="sm" type="file" multiple onChange={handleFileChange} className="search_input"/>
+                        <Button size="sm" variant="secondary" onClick={handleUpload} className="search_input">Upload</Button>
                     </Form.Group>
                 </Form>
             </Container>
