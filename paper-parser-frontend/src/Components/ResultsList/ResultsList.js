@@ -10,14 +10,14 @@ function Result(props){
         <Card className="result">
             <Card.Body>
                 <Card.Title>
-                    <b>{props.result.article_title}</b>
+                    <b>{props.result.article_title.match(/[A-Z][a-z]+|[0-9]+/g).join(" ")}</b>
                 </Card.Title>
                 <div className="horizontal">
                     <Card.Text className="right_margin">
-                        Page: {props.result.page_number.toString()}
+                        <i>Page: {props.result.page_number.toString()}</i>
                     </Card.Text>
                     <Card.Text>
-                        Score: {props.result.score.toString()}
+                        <i>Score: {props.result.score.toString()}</i>
                     </Card.Text>
                 </div>
                 
