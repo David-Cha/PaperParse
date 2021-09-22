@@ -1,7 +1,8 @@
 # StatSleuth
 
 A rapid way to comb through medical journal articles using Elasticsearch's full-text search engine.
-2nd place winner of Medhacks 2021. Devpost link: https://devpost.com/software/statsleuth?ref_content=my-projects-tab&ref_feature=my_projects
+
+**2nd place winner of Medhacks 2021.** Devpost link: https://devpost.com/software/statsleuth?ref_content=my-projects-tab&ref_feature=my_projects
 
 
 # Inspiration
